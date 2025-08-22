@@ -1,9 +1,7 @@
 // Configuration
 const CONFIG = {
     API_URL: '/api/generate',
-    NOCODB_BASE_URL: 'https://wsj7jcm3.nocodb.com',
-    NOCODB_API_TOKEN: 'sAaRgcxQ1XH09weQxV4rtcDMV6HH2g87yAWXx3wA',
-    NOCODB_TABLE_ID: 'mz68xazzeuhwshg'
+    SURPRISE_URL: '/api/surprise'
 };
 
 // DOM elements
@@ -71,9 +69,11 @@ async function generateImage() {
 // Surprise Me function
 async function surpriseMe() {
     try {
-        const prompt = await getRandomPromptFromNocoDB();
-        if (prompt) {
-            promptInput.value = prompt;
+        const response = await fetch(CONFIG.SURPRISE_URL);
+        const data = await response.json();
+        
+        if (data.success) {
+            promptInput.value = data.prompt;
             generateImage();
         } else {
             showError('Could not fetch a random prompt. Please try again.');
@@ -81,42 +81,6 @@ async function surpriseMe() {
     } catch (error) {
         showError('Error getting random prompt: ' + error.message);
     }
-}
-
-// Get random prompt from NocoDB
-async function getRandomPromptFromNocoDB() {
-    const apiUrl = `${CONFIG.NOCODB_BASE_URL}/api/v2/tables/${CONFIG.NOCODB_TABLE_ID}/records`;
-    const headers = { 'xc-token': CONFIG.NOCODB_API_TOKEN };
-
-    try {
-        const response = await fetch(apiUrl, { headers });
-        const data = await response.json();
-        
-        if (data.list && data.list.length > 0) {
-            const randomRecord = data.list[Math.floor(Math.random() * data.list.length)];
-            const prompt = randomRecord.Prompts || randomRecord;
-            return prompt.prompt || prompt.Prompt || 'A beautiful AI-generated image';
-        }
-    } catch (error) {
-        console.log('NocoDB fallback to local prompts');
-        // Fallback to local prompts
-        return getRandomLocalPrompt();
-    }
-}
-
-// Fallback to local prompts
-function getRandomLocalPrompt() {
-    const localPrompts = [
-        'A serene mountain landscape at sunset',
-        'A futuristic city with flying cars',
-        'A magical forest with glowing mushrooms',
-        'A cozy coffee shop on a rainy day',
-        'A space station orbiting Earth',
-        'A steampunk airship in the clouds',
-        'A peaceful beach at dawn',
-        'A cyberpunk street scene at night'
-    ];
-    return localPrompts[Math.floor(Math.random() * localPrompts.length)];
 }
 
 // Download image

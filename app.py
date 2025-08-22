@@ -8,6 +8,7 @@ import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
 
 from ai_service import generate_image
+from prompts_service import get_prompt
 
 app = Flask(__name__)
 CORS(app)
@@ -56,6 +57,32 @@ def api_generate():
 
     except Exception as e:
         print(f"❌ Error generating image: {str(e)}")
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
+
+# API endpoint for random prompt
+@app.route('/api/surprise', methods=['GET'])
+def api_surprise():
+    try:
+        # Get a random prompt from NocoDB or local fallback
+        prompt_data = get_prompt("random")
+        
+        if prompt_data and prompt_data.get('prompt'):
+            return jsonify({
+                'success': True,
+                'prompt': prompt_data.get('prompt'),
+                'character': prompt_data.get('character', 'random')
+            })
+        else:
+            return jsonify({
+                'success': False,
+                'error': 'No prompts available'
+            }), 404
+            
+    except Exception as e:
+        print(f"❌ Error getting random prompt: {str(e)}")
         return jsonify({
             'success': False,
             'error': str(e)
