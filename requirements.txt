@@ -1,0 +1,15 @@
+# Core dependencies
+requests>=2.31.0
+python-dotenv>=1.0.0
+pillow>=10.0.0
+
+# AI/ML dependencies
+diffusers>=0.24.0
+transformers>=4.35.0
+accelerate>=0.24.0
+safetensors>=0.4.0
+torch>=2.0.0
+
+# Web framework
+flask>=3.0.0
+flask-cors>=4.0.0

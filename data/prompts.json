@@ -1,0 +1,38 @@
+{
+  "prompts": [
+    {
+      "character": "fantasy_tavern",
+      "prompt": "A cozy fantasy tavern with warm lighting, wooden beams, and adventurers sharing stories around a crackling fireplace",
+      "negative_prompt": "blurry, lowres, watermark, text, modern",
+      "width": 768,
+      "height": 768,
+      "num_inference_steps": 25,
+      "guidance_scale": 6.5,
+      "sampler": "dpmpp_2m",
+      "upscaler": ""
+    },
+    {
+      "character": "cyberpunk_city",
+      "prompt": "A futuristic cyberpunk cityscape with neon lights, flying cars, and towering skyscrapers under a purple sky",
+      "negative_prompt": "blurry, lowres, watermark, text, natural",
+      "width": 768,
+      "height": 768,
+      "num_inference_steps": 25,
+      "guidance_scale": 6.5,
+      "sampler": "dpmpp_2m",
+      "upscaler": ""
+    },
+    {
+      "character": "magical_forest",
+      "prompt": "An enchanted forest with glowing mushrooms, fairy lights, and ancient trees with mystical energy",
+      "negative_prompt": "blurry, lowres, watermark, text, urban",
+      "width": 768,
+      "height": 768,
+      "num_inference_steps": 25,
+      "guidance_scale": 6.5,
+      "sampler": "dpmpp_2m",
+      "upscaler": ""
+    }
+  ]
+}
+

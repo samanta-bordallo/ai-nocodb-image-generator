@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Image Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 AI Image Generator</h1>
+            <p>Create beautiful images with AI using your own prompts</p>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <div class="form-group">
+                    <label for="prompt">Describe your image:</label>
+                    <textarea id="prompt" placeholder="A beautiful sunset over mountains, digital art style..." rows="3"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="width">Width:</label>
+                        <input type="number" id="width" value="768" min="256" max="1024" step="64">
+                    </div>
+                    <div class="form-group">
+                        <label for="height">Height:</label>
+                        <input type="number" id="height" value="768" min="256" max="1024" step="64">
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button id="generateBtn" class="btn btn-primary">
+                        <span class="btn-text">Generate Image</span>
+                        <span class="btn-loading" style="display: none;">Generating...</span>
+                    </button>
+                    <button id="surpriseBtn" class="btn btn-secondary">Surprise Me!</button>
+                </div>
+            </div>
+
+            <div class="result-section" id="resultSection" style="display: none;">
+                <h3>Generated Image</h3>
+                <div class="image-container">
+                    <img id="generatedImage" alt="Generated image">
+                </div>
+                <div class="image-actions">
+                    <button id="downloadBtn" class="btn btn-outline">Download</button>
+                    <button id="shareBtn" class="btn btn-outline">Share</button>
+                </div>
+            </div>
+
+            <div class="error-section" id="errorSection" style="display: none;">
+                <div class="error-message" id="errorMessage"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
